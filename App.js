@@ -5,7 +5,7 @@ import MapView from 'react-native-maps';
 import * as Location from 'expo-location';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from './firebase';
 
 const Map = () => {
@@ -51,13 +51,28 @@ const Login = ({ navigation }) => {
   const createNewUser = () => {
     createUserWithEmailAndPassword(auth, email, pass)
     .then((userCredential) => {
+      console.log("SUCCESSFUL SIGN-UP!");
       const user = userCredential.user;
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
+      console.log(errorMessage);
     });
-    console.log("HELLO");
+  }
+
+  const loginUser = () => {
+    signInWithEmailAndPassword(auth, email, pass)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      console.log("SUCCESSFUL LOGIN!");
+      navigation.navigate("Map");
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorMessage);
+    });
   }
 
   return (
@@ -89,7 +104,7 @@ const Login = ({ navigation }) => {
         marginTop: 20
       }}>
         <TouchableOpacity
-          onPress={() => navigation.navigate("Map")}
+          onPress={() => loginUser()}
           style={styles.button}>
             <Text style={styles.buttonText}> Log-in</Text>
         </TouchableOpacity>

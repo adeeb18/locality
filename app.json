@@ -30,7 +30,8 @@
         "NSLocationWhenInUseUsageDescription": "Allows App to use your location",
         "NSFaceIDUsageDescription": "Allows App to use Face ID for a simpler sign in.",
         "googleServicesFile": "./GoogleService-Infor.plist"
-      }
+      },
+      "bundleIdentifier": "com.evanzh15.locality"
     },
     "android": {
       "adaptiveIcon": {
@@ -40,6 +41,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "3ec49cfa-7f31-447e-9d84-a7a77773fa2f"
+      }
     }
   }
 }

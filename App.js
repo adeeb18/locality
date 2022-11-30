@@ -5,7 +5,6 @@ import MapView from 'react-native-maps';
 import * as Location from 'expo-location';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const Map = () => {
   return(
@@ -46,23 +45,6 @@ const Map = () => {
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState(null);
   const [pass, setPass] = useState(null);
-  
-  const auth = getAuth();
-  const handleSignUp = () => {
-    auth
-    createUserWithEmailAndPassword(auth, email, pass)
-    .then((userCredential) => {
-      // Signed in 
-      const user = userCredential.user;
-      console.log(user.email);
-      // ...
-    })
-      .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // ..
-    });
-  }
   return (
     <View style={styles.container}>
       <Text style = {styles.baseText}>
@@ -97,7 +79,7 @@ const Login = ({ navigation }) => {
             <Text style={styles.buttonText}> Log-in</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={handleSignUp()}
+          onPress={() => alert('Hello, world!')}
           style={styles.button}>
             <Text style={styles.buttonText}> Sign-up</Text>
         </TouchableOpacity>

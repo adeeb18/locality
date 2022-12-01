@@ -566,5 +566,6 @@ const styles = StyleSheet.create({
   },
 });
 
+console.warn = () => {};
 
 export default App;

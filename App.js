@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Dimensions, TouchableOpacity, TextInput} from 'react-native';
+import { StyleSheet, Text, View, Dimensions, TouchableOpacity, Pressable, TextInput} from 'react-native';
 import MapView from 'react-native-maps';
 import * as Location from 'expo-location';
 import { NavigationContainer } from '@react-navigation/native';
@@ -386,19 +386,6 @@ const Login = ({ navigation }) => {
   const [email, setEmail] = useState(null);
   const [pass, setPass] = useState(null);
 
-  const createNewUser = () => {
-    createUserWithEmailAndPassword(auth, email, pass)
-    .then((userCredential) => {
-      console.log("SUCCESSFUL SIGN-UP!");
-      const user = userCredential.user;
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorMessage);
-    });
-  }
-
   const loginUser = () => {
     signInWithEmailAndPassword(auth, email, pass)
     .then((userCredential) => {
@@ -414,7 +401,7 @@ const Login = ({ navigation }) => {
   }
 
   return (
-    <View style={styles.container}>
+    <View style = {styles.container}>
       <Text style = {styles.baseText}>
         <Text style = {styles.titleText}>
           Locality
@@ -447,13 +434,84 @@ const Login = ({ navigation }) => {
             <Text style={styles.buttonText}> Log-in</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => createNewUser()}
+          onPress={() => navigation.navigate(SignUp) } //createNewUser()
           style={styles.button}>
             <Text style={styles.buttonText}> Sign-up</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
+}
+
+const SignUp = ({ navigation }) => {
+  const [email, setEmail] = useState(null);
+  const [pass, setPass] = useState(null);
+  const [confirmEmail, setConfirmEmail] = useState(null);
+
+  function createNewUser() {
+    if (confirmEmail === email) {
+      createUserWithEmailAndPassword(auth, email, pass)
+      .then((userCredential) => {
+        console.log("SUCCESSFUL SIGN-UP!");
+        const user = userCredential.user;
+        navigation.navigate(Login);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage);
+      });
+      return true;
+    } else {
+      console.log("UNSUCCUESSFUL SIGN-UP!");
+    }
+    return false;
+  }
+
+  return (
+    <View style = {styles.container}>
+      <Text style = {styles.baseText}>
+        <Text style = {styles.titleText}>
+          Locality
+        </Text>
+      </Text>
+      <TextInput
+        placeholder='E-mail'
+        autoCorrect={false}
+        style={styles.textInp}
+        keyboardType='email-address'
+        onChangeText={text => setEmail(text)}
+        value={email}
+      />
+      <TextInput
+        placeholder='Confirm E-mail'
+        autoCorrect={false}
+        style={styles.textInp}
+        keyboardType='email-address'
+        onChangeText={text => setConfirmEmail(text)}
+        value={confirmEmail}
+      />
+      <TextInput
+        placeholder='Password'
+        autoCorrect={false}
+        style={styles.textInp}
+        secureTextEntry={true}
+        onChangeText={text => setPass(text)}
+        value={pass}
+      />
+      <View style={{
+        justifyContent:'space-evenly',
+        flexDirection: 'row',
+        marginTop: 20
+      }}>
+        <TouchableOpacity
+          onPress={() => createNewUser()}
+          style={styles.button}>
+            <Text style={styles.buttonText}> Sign-Up</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  )
 }
 
 const Stack = createStackNavigator();
@@ -464,6 +522,7 @@ const App = () => {
       <Stack.Navigator initialRouteName='LoginScreen'>
         <Stack.Screen name='Login' component={Login} />
         <Stack.Screen name='Map' component={Map} />
+        <Stack.Screen name='SignUp' component={SignUp} />
       </Stack.Navigator>
     </NavigationContainer>
   )

@@ -459,11 +459,6 @@ const Login = ({ navigation }) => {
           style={styles.button}>
             <Text style={styles.buttonText}>Sign-up</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate(Testing) }
-          style={styles.button}>
-            <Text style={styles.buttonText}>Testing</Text>
-        </TouchableOpacity>
       </View>
     </View>
   );
@@ -582,40 +577,6 @@ const SignUp = ({ navigation }) => {
   )
 }
 
-const Testing = () => {
-  const [modalVisible, setModalVisible] = useState(false);
-  return (
-    <View style={styles.container}>
-      <Modal 
-        animationType="fade"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-          setModalVisible(!modalVisible);
-        }}
-        >
-        <View style={styles.container}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
-            <Pressable
-              style={[styles.modalButton, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={styles.textStyle}>Hide Modal</Text>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
-      <Pressable
-        style={[styles.modalButton, styles.buttonOpen]}
-        onPress={() => setModalVisible(true)}
-      >
-        <Text style={styles.textStyle}>Show Modal</Text>
-      </Pressable>
-    </View>
-  )
-}
-
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -625,7 +586,6 @@ const App = () => {
         <Stack.Screen name='Login' component={Login} />
         <Stack.Screen name='Map' component={Map} />
         <Stack.Screen name='SignUp' component={SignUp} />
-        <Stack.Screen name='Testing' component={Testing} />
       </Stack.Navigator>
     </NavigationContainer>
   )
@@ -703,6 +663,5 @@ const styles = StyleSheet.create({
     textAlign: "center"
   }
 });
-
 
 export default App;

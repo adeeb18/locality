@@ -15,317 +15,317 @@ const localityData = [
     "Name": "African Unique - International Marketplace",
     "Tag": "African Market",
     "Type": "Locally owned business",
-    "Lat": "29.700073",
-    "Long": "-82.3694288"
+    "Lat": 29.700073,
+    "Long": -82.3694288
   },
   {
     "Address": "703 NE 1st Street, Gainesville, FL, 32601",
-    "Name": "Alachua County Coalition for the Homeless and Hungry ",
+    "Name": "Alachua County Coalition for the Homeless and Hungry ",
     "Type": "Charity",
-    "Lat": "29.6582209",
-    "Long": "-82.3236734"
+    "Lat": 29.6582209,
+    "Long": -82.3236734
   },
   {
     "Address": "3615 SW 13th Street, Suite 4, Gainesville, FL, 32608",
     "Name": "Alachua County Health Promotion and Wellness Coalition",
     "Type": "Charity",
-    "Lat": "29.6196877",
-    "Long": "-82.3403397"
+    "Lat": 29.6196877,
+    "Long": -82.3403397
   },
   {
     "Address": "2630 NW 41 St, Gainesville, FL 32606",
     "Name": "Alachua Habitat for Humanity",
     "Type": "Charity",
-    "Lat": "29.6774944",
-    "Long": "-82.3868872"
+    "Lat": 29.6774944,
+    "Long": -82.3868872
   },
   {
     "Address": "520 Newell Dr, Gainesville, FL 32603",
     "Name": "Alan and Cathy Hitchcock Field &amp; Fork Pantry",
     "Type": "Food bank",
-    "Lat": "29.6473592",
-    "Long": "-82.3440286"
+    "Lat": 29.6473592,
+    "Long": -82.3440286
   },
   {
     "Address": "6815 SW Archer Road, Gainesville, FL, 32608",
     "Name": "AMI Kids",
     "Type": "Charity",
-    "Lat": "29.5998911",
-    "Long": "-82.4136659"
+    "Lat": 29.5998911,
+    "Long": -82.4136659
   },
   {
     "Address": "2618 NW 6th Street, Gainesville, FL, 32609",
     "Name": "Arbor House",
     "Type": "Charity",
-    "Lat": "29.6773734",
-    "Long": "-82.3311523"
+    "Lat": 29.6773734,
+    "Long": -82.3311523
   },
   {
     "Address": "325 NW 10th Ave, Gainesville, FL 32601",
     "Name": "Bread of the Mighty Food Bank",
     "Type": "Food bank",
-    "Lat": "29.6609324",
-    "Long": "-82.3284265"
+    "Lat": 29.6609324,
+    "Long": -82.3284265
   },
   {
     "Address": "1701 NE 9th St, Gainesville, FL 32609",
     "Name": "Catholic Charities Bureau",
     "Type": "Charity",
-    "Lat": "29.6675046",
-    "Long": "-82.3142963"
+    "Lat": 29.6675046,
+    "Long": -82.3142963
   },
   {
     "Address": "3615 SW 13th Street, Gainesville, FL, 32608",
     "Name": "CDS Family and Health Services",
     "Type": "Charity",
-    "Lat": "29.6196877",
-    "Long": "-82.3403397"
+    "Lat": 29.6196877,
+    "Long": -82.3403397
   },
   {
     "Address": "500 E. University Avenue, Suite A, Gainesville, FL, 32601",
     "Name": "Child Advocacy Center of Gainesville",
     "Type": "Charity",
-    "Lat": "29.6521818",
-    "Long": "-82.3206137"
+    "Lat": 29.6521818,
+    "Long": -82.3206137
   },
   {
     "Address": "711 NW 1st Street, Gainesville, FL, 32601",
     "Name": "Children's Home Society",
     "Type": "Charity",
-    "Lat": "29.6583211",
-    "Long": "-82.3256289"
+    "Lat": 29.6583211,
+    "Long": -82.3256289
   },
   {
     "Address": "418 NW 8th Ave, Gainesville, FL 32601",
     "Name": "Chun Ching Market",
     "Tag": "Asian Market",
     "Type": "Locally owned business",
-    "Lat": "29.6598616",
-    "Long": "-82.3293808"
+    "Lat": 29.6598616,
+    "Long": -82.3293808
   },
   {
     "Address": "3919 Newberry Rd, Gainesville, FL 32607",
     "Name": "Community Foundation of North Central Florida",
     "Type": "Charity",
-    "Lat": "29.653076",
-    "Long": "-82.3839941"
+    "Lat": 29.653076,
+    "Long": -82.3839941
   },
   {
     "Address": "12626 NW Co Rd 231, Gainesville, FL 32609",
     "Name": "Critter Creek Farm Sanctuary",
     "Type": "Charity",
-    "Lat": "29.7707976",
-    "Long": "-82.3573946"
+    "Lat": 29.7707976,
+    "Long": -82.3573946
   },
   {
     "Address": "4110 SW 34th St, Gainesville, FL 32608",
     "Name": "Deshi Bazaar",
     "Tag": "Indian Market",
     "Type": "Locally owned business",
-    "Lat": "29.6149345",
-    "Long": "-82.3726833"
+    "Lat": 29.6149345,
+    "Long": -82.3726833
   },
   {
     "Address": "15818 NW 140th Street, Alachua, FL, 32615",
     "Name": "Dream Girlz",
     "Type": "Charity",
-    "Lat": "29.8004507",
-    "Long": "-82.49466"
+    "Lat": 29.8004507,
+    "Long": -82.49466
   },
   {
     "Address": "4424 NW 13th Street, A5, Gainesville, FL, 32609",
     "Name": "Early Learning Coalition of Alachua County",
     "Type": "Charity",
-    "Lat": "29.6950514",
-    "Long": "-82.3394645"
+    "Lat": 29.6950514,
+    "Long": -82.3394645
   },
   {
     "Address": "1349 NW 23rd Ave, Gainesville, FL 32605",
     "Name": "Eastern Market",
     "Tag": "Asian Market",
     "Type": "Locally owned business",
-    "Lat": "29.6728962",
-    "Long": "-82.3395013"
+    "Lat": 29.6728962,
+    "Long": -82.3395013
   },
   {
     "Address": "3045 SW 34th St Ste 30, Gainesville, FL 32608",
     "Name": "Enson Market",
     "Tag": "Asian Market",
     "Type": "Locally owned business",
-    "Lat": "29.6256911",
-    "Long": "-82.3705784"
+    "Lat": 29.6256911,
+    "Long": -82.3705784
   },
   {
     "Address": "238 SW 4th Ave, Gainesville, FL 32601",
     "Name": "Gainesville Community Ministry",
     "Type": "Food bank",
-    "Lat": "29.648602",
-    "Long": "-82.3277753"
+    "Lat": 29.648602,
+    "Long": -82.3277753
   },
   {
     "Address": "5106 NW 8th Ave, Gainesville, FL 32605",
     "Name": "Gainesville Fisher House Foundation",
     "Type": "Charity",
-    "Lat": "29.6599417",
-    "Long": "-82.3975692"
+    "Lat": 29.6599417,
+    "Long": -82.3975692
   },
   {
     "Address": "3345 SW 34th Street, Suite 2, Gainesville, FL, 32608",
     "Name": "GiGi's Playhouse Down Syndrome Achievement Center",
     "Type": "Charity",
-    "Lat": "29.6238899",
-    "Long": "-82.3710559"
+    "Lat": 29.6238899,
+    "Long": -82.3710559
   },
   {
     "Address": "2101 NW 39th Avenue, Gainesville, FL, 32605",
     "Name": "Girl's Place",
     "Type": " Charity;",
-    "Lat": "29.6878431",
-    "Long": "-82.3515216"
+    "Lat": 29.6878431,
+    "Long": -82.3515216
   },
   {
     "Address": "3055 NE 28th Dr, Gainesville, FL 32609",
     "Name": "GRACE Marketplace",
     "Type": "Charity",
-    "Lat": "29.6796399",
-    "Long": "-82.2879375"
+    "Lat": 29.6796399,
+    "Long": -82.2879375
   },
   {
     "Address": "6011 NW 1st Place, Gainesville, FL, 32607",
     "Name": "Healthy Families",
     "Type": "Charity",
-    "Lat": "29.6533314",
-    "Long": "-82.4067494"
+    "Lat": 29.6533314,
+    "Long": -82.4067494
   },
   {
     "Address": "1785 NW 80 BLVD, Gainesville, Florida, 32606",
     "Name": "Healthy Start of North Central Florida",
     "Type": "Charity",
-    "Lat": "29.6699732",
-    "Long": "-82.4290927"
+    "Lat": 29.6699732,
+    "Long": -82.4290927
   },
   {
     "Address": "2603 NW 13th Street, Box 308, Gainesville, FL, 32609",
     "Name": "Help Me Grow Alachua",
     "Type": "Charity",
-    "Lat": "29.6763591",
-    "Long": "-82.3384442"
+    "Lat": 29.6763591,
+    "Long": -82.3384442
   },
   {
     "Address": "3550 SW 34th St suite j, Gainesville, FL 32608",
     "Name": "India Bazaar",
     "Tag": "Indian Market",
     "Type": "Locally owned business",
-    "Lat": "29.621201",
-    "Long": "-82.3736086"
+    "Lat": 29.621201,
+    "Long": -82.3736086
   },
   {
     "Address": "13915 N State Rd 121, Gainesville, FL 32653",
     "Name": "Jungle Friends Primate Sanctuary",
     "Type": "Charity",
-    "Lat": "29.7826847",
-    "Long": "-82.3750531"
+    "Lat": 29.7826847,
+    "Long": -82.3750531
   },
   {
     "Address": "211 SW 4th Ave, Gainesville, FL 32601",
     "Name": "Keep Alachua County Beautiful",
     "Type": "Charity",
-    "Lat": "29.6482253",
-    "Long": "-82.3270493"
+    "Lat": 29.6482253,
+    "Long": -82.3270493
   },
   {
     "Address": "2022 SW 122nd Avenue, Gainesville, FL, 32608",
     "Name": "Kid 2 Kid Closet at the Family Church",
     "Type": "Charity",
-    "Lat": "29.7666381",
-    "Long": "-82.3596105"
+    "Lat": 29.7666381,
+    "Long": -82.3596105
   },
   {
     "Address": "3721 W University Ave, Gainesville, FL 32607",
     "Name": "La Aurora Latin Market",
     "Tag": "Latin Market",
     "Type": "Locally owned business",
-    "Lat": "29.6512525",
-    "Long": "-82.3790111"
+    "Lat": 29.6512525,
+    "Long": -82.3790111
   },
   {
     "Address": "1010 SE 4th Avenue, Gainesville, FL, 32601",
     "Name": "PACE Center for Girls",
     "Type": "Charity",
-    "Lat": "29.6486147",
-    "Long": "-82.3131297"
+    "Lat": 29.6486147,
+    "Long": -82.3131297
   },
   {
     "Address": "5950 NW 1st Place, Suite A, Gainesville, FL, 32607",
     "Name": "Partnership for Strong Families",
     "Type": "Charity",
-    "Lat": "29.6538697",
-    "Long": "-82.4060147"
+    "Lat": 29.6538697,
+    "Long": -82.4060147
   },
   {
     "Address": "2100 NW 53rd Avenue, Gainesville, FL, 32653",
     "Name": "Peaceful Paths",
     "Type": "Charity",
-    "Lat": "29.7039049",
-    "Long": "-82.3517722"
+    "Lat": 29.7039049,
+    "Long": -82.3517722
   },
   {
     "Address": "1600 SW 14th St, Gainesville, FL 32608",
     "Name": "Ronald McDonald House",
     "Type": "Charity",
-    "Lat": "29.63591",
-    "Long": "-82.3410228"
+    "Lat": 29.63591,
+    "Long": -82.3410228
   },
   {
     "Address": "639 E University Ave, Gainesville, FL 32601",
     "Name": "Salvation Army",
     "Type": "Charity",
-    "Lat": "29.6515774",
-    "Long": "-82.3179585"
+    "Lat": 29.6515774,
+    "Long": -82.3179585
   },
   {
     "Address": "4581 NW 6th St suite a, Gainesville, FL 32609",
     "Name": "Sea Turtle Conservancy",
     "Type": "Charity",
-    "Lat": "29.6964918",
-    "Long": "-82.3342288"
+    "Lat": 29.6964918,
+    "Long": -82.3342288
   },
   {
     "Address": "413 S Main St, Gainesville, FL 32601",
     "Name": "St Francis House",
     "Type": "Soup kitchen",
-    "Lat": "29.6480411",
-    "Long": "-82.3244716"
+    "Lat": 29.6480411,
+    "Long": -82.3244716
   },
   {
     "Address": "2802 NE 8th Avenue, Gainesville, FL, 32641",
     "Name": "The Education Foundation",
     "Type": "Charity",
-    "Lat": "29.6598945",
-    "Long": "-82.2885799"
+    "Lat": 29.6598945,
+    "Long": -82.2885799
   },
   {
     "Address": "515 NW 23rd Ave, Gainesville, FL 32609",
     "Name": "Ward's Supermarket",
     "Tag": "Traditional Market",
     "Type": "Locally owned business",
-    "Lat": "29.6735514",
-    "Long": "-82.3296511"
+    "Lat": 29.6735514,
+    "Long": -82.3296511
   },
   {
     "Address": "219 NW 10th Ave, Gainesville, FL 32601",
     "Name": "Working Food Community Center",
     "Type": "Charity",
-    "Lat": "29.6604848",
-    "Long": "-82.3274147"
+    "Lat": 29.6604848,
+    "Long": -82.3274147
   },
   {
     "Address": "2325 SW 13th St, Gainesville, FL 32608",
     "Name": "Zeezenia Kitchen &amp; Market",
     "Tag": "International Market",
     "Type": "Locally owned business",
-    "Lat": "29.6302567",
-    "Long": "-82.3388575"
+    "Lat": 29.6302567,
+    "Long": -82.3388575
   }
 ]
 
@@ -506,8 +506,6 @@ const styles = StyleSheet.create({
     width: 200
   },
 });
-
-
 
 
 export default App;

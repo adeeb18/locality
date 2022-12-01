@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Dimensions, TouchableOpacity, Pressable, TextInput} from 'react-native';
+import { StyleSheet, Modal, Text, View, Dimensions, TouchableOpacity, Pressable, TextInput, Alert} from 'react-native';
 import MapView from 'react-native-maps';
 import * as Location from 'expo-location';
 import { NavigationContainer } from '@react-navigation/native';
@@ -385,6 +385,7 @@ const Map = () => {
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState(null);
   const [pass, setPass] = useState(null);
+  const [successfulLogin, setSuccessfulLogin] = useState(false);
 
   const loginUser = () => {
     signInWithEmailAndPassword(auth, email, pass)
@@ -397,11 +398,31 @@ const Login = ({ navigation }) => {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(errorMessage);
+      setSuccessfulLogin(!successfulLogin);
     });
   }
 
   return (
     <View style = {styles.container}>
+      <Modal 
+      animationType="fade"
+      transparent={true}
+      visible={successfulLogin}
+      onRequestClose={() => {
+        setSuccessfulLogin(!successfulLogin);
+      }}
+      >
+        <View style={styles.container}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Incorrect E-mail/Password!</Text>
+            <Pressable
+              style={[styles.modalButton, styles.buttonClose]}
+              onPress={() => setSuccessfulLogin(!successfulLogin)}>
+              <Text style={styles.textStyle}>Go back</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
       <Text style = {styles.baseText}>
         <Text style = {styles.titleText}>
           Locality
@@ -431,12 +452,17 @@ const Login = ({ navigation }) => {
         <TouchableOpacity
           onPress={() => loginUser()}
           style={styles.button}>
-            <Text style={styles.buttonText}> Log-in</Text>
+            <Text style={styles.buttonText}>Log-in</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate(SignUp) } //createNewUser()
+          onPress={() => navigation.navigate(SignUp) }
           style={styles.button}>
-            <Text style={styles.buttonText}> Sign-up</Text>
+            <Text style={styles.buttonText}>Sign-up</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate(Testing) }
+          style={styles.button}>
+            <Text style={styles.buttonText}>Testing</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -447,6 +473,8 @@ const SignUp = ({ navigation }) => {
   const [email, setEmail] = useState(null);
   const [pass, setPass] = useState(null);
   const [confirmEmail, setConfirmEmail] = useState(null);
+  const [wrongCred, setWrongCred] = useState(false);
+  const [verifyEmail, setVerifyEmail] = useState(false);
 
   function createNewUser() {
     if (confirmEmail === email) {
@@ -460,16 +488,56 @@ const SignUp = ({ navigation }) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorMessage);
+        setWrongCred(!wrongCred);
       });
       return true;
     } else {
       console.log("UNSUCCUESSFUL SIGN-UP!");
+      setVerifyEmail(!verifyEmail);
     }
     return false;
   }
 
   return (
     <View style = {styles.container}>
+      <Modal 
+      animationType="fade"
+      transparent={true}
+      visible={verifyEmail}
+      onRequestClose={() => {
+        setVerifyEmail(!verifyEmail);
+      }}
+      >
+        <View style={styles.container}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>E-mails do not match!</Text>
+            <Pressable
+              style={[styles.modalButton, styles.buttonClose]}
+              onPress={() => setVerifyEmail(!verifyEmail)}>
+              <Text style={styles.textStyle}>Go back</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+      <Modal 
+      animationType="fade"
+      transparent={true}
+      visible={wrongCred}
+      onRequestClose={() => {
+        setWrongCred(!wrongCred);
+      }}
+      >
+        <View style={styles.container}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>E-mail already in use!</Text>
+            <Pressable
+              style={[styles.modalButton, styles.buttonClose]}
+              onPress={() => setWrongCred(!wrongCred)}>
+              <Text style={styles.textStyle}>Go back</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
       <Text style = {styles.baseText}>
         <Text style = {styles.titleText}>
           Locality
@@ -514,6 +582,40 @@ const SignUp = ({ navigation }) => {
   )
 }
 
+const Testing = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+  return (
+    <View style={styles.container}>
+      <Modal 
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+          setModalVisible(!modalVisible);
+        }}
+        >
+        <View style={styles.container}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Hello World!</Text>
+            <Pressable
+              style={[styles.modalButton, styles.buttonClose]}
+              onPress={() => setModalVisible(!modalVisible)}>
+              <Text style={styles.textStyle}>Hide Modal</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+      <Pressable
+        style={[styles.modalButton, styles.buttonOpen]}
+        onPress={() => setModalVisible(true)}
+      >
+        <Text style={styles.textStyle}>Show Modal</Text>
+      </Pressable>
+    </View>
+  )
+}
+
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -523,6 +625,7 @@ const App = () => {
         <Stack.Screen name='Login' component={Login} />
         <Stack.Screen name='Map' component={Map} />
         <Stack.Screen name='SignUp' component={SignUp} />
+        <Stack.Screen name='Testing' component={Testing} />
       </Stack.Navigator>
     </NavigationContainer>
   )
@@ -564,6 +667,41 @@ const styles = StyleSheet.create({
     marginTop: 10,
     width: 200
   },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+  modalButton: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2
+  },
+  buttonOpen: {
+    backgroundColor: "#F194FF",
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center"
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center"
+  }
 });
 
 

@@ -1,7 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
 import { StyleSheet, Modal, Text, View, Dimensions, TouchableOpacity, Pressable, TextInput, Alert} from 'react-native';
-import MapView from 'react-native-maps';
+import MapView, { Circle } from 'react-native-maps';
+import MapViewDirections from 'react-native-maps-directions';
 import * as Location from 'expo-location';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -381,14 +382,18 @@ const Map = () => {
           longitudeDelta: 0.0421,
         }}
     >
-    {mapMarkers()}
-    <Marker
-      key={"you"}
-      coordinate={{ latitude: latitude, longitude: longitude }}
-      title={"This is you"}
-      description={"You"}
-      pinColor = "green"
-    ></Marker>
+      <MapViewDirections
+        origin={{latitude: 29.6302567, longitude: -82.3388575}}
+        destination={{latitude: latitude, longitude: longitude}}
+        apikey={"AIzaSyBmnPPSVREyx-OAtCfFHA7gFXMEPVlGnTg"}
+        strokeWidth={4}
+        strokeColor="#3388FF"/>
+      {mapMarkers()}
+      <Marker
+        coordinate={{ latitude: latitude, longitude: longitude }}
+        title={"You"}
+        pinColor='green'
+      ></Marker>
     </MapView>  
   </View>
   )

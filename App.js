@@ -42,7 +42,7 @@ const localityData = [
   },
   {
     "Address": "520 Newell Dr, Gainesville, FL 32603",
-    "Name": "Alan and Cathy Hitchcock Field &amp; Fork Pantry",
+    "Name": "Alan and Cathy Hitchcock Field & Fork Pantry",
     "Type": "Food bank",
     "Lat": 29.6473592,
     "Long": -82.3440286

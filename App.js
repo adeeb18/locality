@@ -332,7 +332,7 @@ const localityData = [
 state = {localityData};
 
 mapMarkers = () => {
-  return this.state.localityData.map((report) => <Marker
+  return state.localityData.map((report) => <Marker
     key={report.Address}
     coordinate={{ latitude: report.Lat, longitude: report.Long }}
     title={report.Name}
@@ -342,12 +342,12 @@ mapMarkers = () => {
 }
 
 const Map = () => {
-  const [location, setLocation]  = useState(null);
+  const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
 
   useEffect(() => {
     (async () => {
-      let {status} = await Location.requestBackgroundPermissionsAsync();
+      let {status} = await Location.requestForegroundPermissionsAsync();
       if(status !== 'granted') {
         setErrorMsg('location permissoins denied')
         return;
@@ -358,26 +358,37 @@ const Map = () => {
   }, []);
 
   let text = 'Waiting...';
+  let latitude = 0;
+  let longitude = 0;
   if(errorMsg) {
     text = errorMsg;
   }
   else if (location) {
     text = JSON.stringify(location);
+    latitude = location.coords.latitude;
+    longitude = location.coords.longitude;
   }
-  console.log(text);
+  //console.log(text);
   return(
   <View>
     <StatusBar style="auto" />
     <MapView 
       style={styles.map} 
         initialRegion={{
-        latitude: 29.643633,
-        longitude: -82.354927,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
-      }}
+          latitude: 29.643633,
+          longitude: -82.354927,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        }}
     >
     {mapMarkers()}
+    <Marker
+      key={"you"}
+      coordinate={{ latitude: latitude, longitude: longitude }}
+      title={"This is you"}
+      description={"You"}
+      pinColor = "green"
+    ></Marker>
     </MapView>  
   </View>
   )

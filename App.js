@@ -342,29 +342,30 @@ mapMarkers = () => {
 }
 
 const Map = () => {
+  const [location, setLocation]  = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      let {status} = await Location.requestBackgroundPermissionsAsync();
+      if(status !== 'granted') {
+        setErrorMsg('location permissoins denied')
+        return;
+      }
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+    })();
+  }, []);
+
+  let text = 'Waiting...';
+  if(errorMsg) {
+    text = errorMsg;
+  }
+  else if (location) {
+    text = JSON.stringify(location);
+  }
+  console.log(text);
   return(
-  // const [location, setLocation]  = useState(null);
-  // const [errorMsg, setErrorMsg] = useState(null);
-
-  // useEffect(() => {
-  //   (async () => {
-  //     let {status} = await Location.requestBackgroundPermissionsAsync();
-  //     if(status !== 'granted') {
-  //       setErrorMsg('location permissoins denied')
-  //       return;
-  //     }
-  //     let location = await Location.getCurrentPositionAsync({});
-  //     setLocation(location);
-  //   })();
-  // }, []);
-
-  // let text = 'Waiting...';
-  // if(errorMsg) {
-  //   text = errorMsg;
-  // }
-  // else if (location) {
-  //   text = JSON.stringify(location);
-  // }
   <View>
     <StatusBar style="auto" />
     <MapView 
@@ -376,7 +377,7 @@ const Map = () => {
         longitudeDelta: 0.0421,
       }}
     >
-    {this.mapMarkers()}
+    {mapMarkers()}
     </MapView>  
   </View>
   )

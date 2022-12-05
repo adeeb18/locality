@@ -19,7 +19,6 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "bundlename",
       "infoPlist": {
         "UIBackgroundModes": [
           "location",

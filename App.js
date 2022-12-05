@@ -322,7 +322,7 @@ const localityData = [
   },
   {
     "Address": "2325 SW 13th St, Gainesville, FL 32608",
-    "Name": "Zeezenia Kitchen &amp; Market",
+    "Name": "Zeezenia Kitchen & Market",
     "Tag": "International Market",
     "Type": "Locally owned business",
     "Lat": 29.6302567,
@@ -541,7 +541,7 @@ const SignUp = ({ navigation }) => {
       >
         <View style={styles.container}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>E-mail already in use!</Text>
+            <Text style={styles.modalText}>Email already in use!</Text>
             <Pressable
               style={[styles.modalButton, styles.buttonClose]}
               onPress={() => setWrongCred(!wrongCred)}>

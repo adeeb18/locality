@@ -1,7 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Dimensions, TouchableOpacity, Pressable, TextInput} from 'react-native';
-import MapView from 'react-native-maps';
+import { StyleSheet, Modal, Text, View, Dimensions, TouchableOpacity, Pressable, TextInput, Alert} from 'react-native';
+import MapView, { Circle } from 'react-native-maps';
+import MapViewDirections from 'react-native-maps-directions';
 import * as Location from 'expo-location';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -41,7 +42,7 @@ const localityData = [
   },
   {
     "Address": "520 Newell Dr, Gainesville, FL 32603",
-    "Name": "Alan and Cathy Hitchcock Field &amp; Fork Pantry",
+    "Name": "Alan and Cathy Hitchcock Field & Fork Pantry",
     "Type": "Food bank",
     "Lat": 29.6473592,
     "Long": -82.3440286
@@ -332,7 +333,7 @@ const localityData = [
 state = {localityData};
 
 mapMarkers = () => {
-  return this.state.localityData.map((report) => <Marker
+  return state.localityData.map((report) => <Marker
     key={report.Address}
     coordinate={{ latitude: report.Lat, longitude: report.Long }}
     title={report.Name}
@@ -342,41 +343,57 @@ mapMarkers = () => {
 }
 
 const Map = () => {
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      let {status} = await Location.requestForegroundPermissionsAsync();
+      if(status !== 'granted') {
+        setErrorMsg('location permissoins denied')
+        return;
+      }
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+    })();
+  }, []);
+
+  let text = 'Waiting...';
+  let latitude = 0;
+  let longitude = 0;
+  if(errorMsg) {
+    text = errorMsg;
+  }
+  else if (location) {
+    text = JSON.stringify(location);
+    latitude = location.coords.latitude;
+    longitude = location.coords.longitude;
+  }
+  //console.log(text);
   return(
-  // const [location, setLocation]  = useState(null);
-  // const [errorMsg, setErrorMsg] = useState(null);
-
-  // useEffect(() => {
-  //   (async () => {
-  //     let {status} = await Location.requestBackgroundPermissionsAsync();
-  //     if(status !== 'granted') {
-  //       setErrorMsg('location permissoins denied')
-  //       return;
-  //     }
-  //     let location = await Location.getCurrentPositionAsync({});
-  //     setLocation(location);
-  //   })();
-  // }, []);
-
-  // let text = 'Waiting...';
-  // if(errorMsg) {
-  //   text = errorMsg;
-  // }
-  // else if (location) {
-  //   text = JSON.stringify(location);
-  // }
   <View>
     <StatusBar style="auto" />
     <MapView 
       style={styles.map} 
         initialRegion={{
-        latitude: 29.643633,
-        longitude: -82.354927,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
-      }}
+          latitude: 29.643633,
+          longitude: -82.354927,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        }}
     >
-    {this.mapMarkers()}
+      <MapViewDirections
+        origin={{latitude: 29.6302567, longitude: -82.3388575}}
+        destination={{latitude: latitude, longitude: longitude}}
+        apikey={"AIzaSyBmnPPSVREyx-OAtCfFHA7gFXMEPVlGnTg"}
+        strokeWidth={4}
+        strokeColor="#3388FF"/>
+      {mapMarkers()}
+      <Marker
+        coordinate={{ latitude: latitude, longitude: longitude }}
+        title={"You"}
+        pinColor='green'
+      ></Marker>
     </MapView>  
   </View>
   )
@@ -385,6 +402,7 @@ const Map = () => {
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState(null);
   const [pass, setPass] = useState(null);
+  const [successfulLogin, setSuccessfulLogin] = useState(false);
 
   const loginUser = () => {
     signInWithEmailAndPassword(auth, email, pass)
@@ -397,11 +415,31 @@ const Login = ({ navigation }) => {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(errorMessage);
+      setSuccessfulLogin(!successfulLogin);
     });
   }
 
   return (
     <View style = {styles.container}>
+      <Modal 
+      animationType="fade"
+      transparent={true}
+      visible={successfulLogin}
+      onRequestClose={() => {
+        setSuccessfulLogin(!successfulLogin);
+      }}
+      >
+        <View style={styles.container}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Incorrect E-mail/Password!</Text>
+            <Pressable
+              style={[styles.modalButton, styles.buttonClose]}
+              onPress={() => setSuccessfulLogin(!successfulLogin)}>
+              <Text style={styles.textStyle}>Go back</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
       <Text style = {styles.baseText}>
         <Text style = {styles.titleText}>
           Locality
@@ -431,12 +469,12 @@ const Login = ({ navigation }) => {
         <TouchableOpacity
           onPress={() => loginUser()}
           style={styles.button}>
-            <Text style={styles.buttonText}> Log-in</Text>
+            <Text style={styles.buttonText}>Log-in</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate(SignUp) } //createNewUser()
+          onPress={() => navigation.navigate(SignUp) }
           style={styles.button}>
-            <Text style={styles.buttonText}> Sign-up</Text>
+            <Text style={styles.buttonText}>Sign-up</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -447,6 +485,8 @@ const SignUp = ({ navigation }) => {
   const [email, setEmail] = useState(null);
   const [pass, setPass] = useState(null);
   const [confirmEmail, setConfirmEmail] = useState(null);
+  const [wrongCred, setWrongCred] = useState(false);
+  const [verifyEmail, setVerifyEmail] = useState(false);
 
   function createNewUser() {
     if (confirmEmail === email) {
@@ -460,16 +500,56 @@ const SignUp = ({ navigation }) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorMessage);
+        setWrongCred(!wrongCred);
       });
       return true;
     } else {
       console.log("UNSUCCUESSFUL SIGN-UP!");
+      setVerifyEmail(!verifyEmail);
     }
     return false;
   }
 
   return (
     <View style = {styles.container}>
+      <Modal 
+      animationType="fade"
+      transparent={true}
+      visible={verifyEmail}
+      onRequestClose={() => {
+        setVerifyEmail(!verifyEmail);
+      }}
+      >
+        <View style={styles.container}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>E-mails do not match!</Text>
+            <Pressable
+              style={[styles.modalButton, styles.buttonClose]}
+              onPress={() => setVerifyEmail(!verifyEmail)}>
+              <Text style={styles.textStyle}>Go back</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+      <Modal 
+      animationType="fade"
+      transparent={true}
+      visible={wrongCred}
+      onRequestClose={() => {
+        setWrongCred(!wrongCred);
+      }}
+      >
+        <View style={styles.container}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>E-mail already in use!</Text>
+            <Pressable
+              style={[styles.modalButton, styles.buttonClose]}
+              onPress={() => setWrongCred(!wrongCred)}>
+              <Text style={styles.textStyle}>Go back</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
       <Text style = {styles.baseText}>
         <Text style = {styles.titleText}>
           Locality
@@ -564,6 +644,41 @@ const styles = StyleSheet.create({
     marginTop: 10,
     width: 200
   },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+  modalButton: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2
+  },
+  buttonOpen: {
+    backgroundColor: "#F194FF",
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center"
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center"
+  }
 });
 
 console.warn = () => {};

@@ -9,9 +9,8 @@ import {
     TouchableOpacity,
     Pressable,
     TextInput,
-    Alert,
 } from "react-native";
-import MapView from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
 import * as Location from "expo-location";
 import { NavigationContainer } from "@react-navigation/native";
@@ -21,7 +20,6 @@ import {
     signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "./firebase";
-import { Marker } from "react-native-maps";
 
 // Contains all of our location data for businesses that
 // meet our criteria.
@@ -346,12 +344,12 @@ const localityData = [
 ];
 
 // Passes our location data into a variable.
-state = { localityData };
+const state = { localityData };
 
 // Function that returns all of our location data from
 // said variable in the form of a <Marker> (a pin in Apple
 // Maps).
-mapMarkers = () => {
+const mapMarkers = () => {
     return state.localityData.map((report) => (
         <Marker
             key={report.Address}
@@ -387,7 +385,6 @@ const Map = () => {
         })();
     }, []);
 
-    let text = "Waiting...";
     let latitude = 0;
     let longitude = 0;
 
@@ -395,9 +392,9 @@ const Map = () => {
     // locally scoped variable to contain the user's current
     // latitude and longitute.
     if (errorMsg) {
-        text = errorMsg;
+        console.log(errorMsg);
     } else if (location) {
-        text = JSON.stringify(location);
+        console.log(JSON.stringify(location));
         latitude = location.coords.latitude;
         longitude = location.coords.longitude;
     }
@@ -453,13 +450,11 @@ const Login = ({ navigation }) => {
     // caused by an incorrect email/pass.
     const loginUser = () => {
         signInWithEmailAndPassword(auth, email, pass)
-            .then((userCredential) => {
-                const user = userCredential.user;
+            .then(() => {
                 console.log("SUCCESSFUL LOGIN!");
                 navigation.navigate("Map");
             })
             .catch((error) => {
-                const errorCode = error.code;
                 const errorMessage = error.message;
                 console.log(errorMessage);
                 setSuccessfulLogin(!successfulLogin);
@@ -551,13 +546,11 @@ const SignUp = ({ navigation }) => {
     function createNewUser() {
         if (confirmEmail === email) {
             createUserWithEmailAndPassword(auth, email, pass)
-                .then((userCredential) => {
+                .then(() => {
                     console.log("SUCCESSFUL SIGN-UP!");
-                    const user = userCredential.user;
                     navigation.navigate(Login);
                 })
                 .catch((error) => {
-                    const errorCode = error.code;
                     const errorMessage = error.message;
                     console.log(errorMessage);
                     setWrongCred(!wrongCred);

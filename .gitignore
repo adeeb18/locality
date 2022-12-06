@@ -1,4 +1,5 @@
 node_modules/
+.prettierrc
 .expo/
 dist/
 npm-debug.*

@@ -3,7 +3,7 @@ module.exports = function(api) {
   return {
     presets: ['babel-preset-expo'],
     plugins: ['react-native-reanimated/plugin'],
-    plugins: ['@babel/plugin-syntax-import-assertions'],
+    plugins: ['@babel/plugin-syntax-import-assertions', 'react-native-reanimated/plugin'],
   };
 };
 

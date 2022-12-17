@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { View, Text, TouchableOpacity, Button, StyleSheet} from "react-native";
 
 export default function MapContainer() {

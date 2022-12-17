@@ -2,25 +2,17 @@ import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import {
     StyleSheet,
-    Modal,
     Text,
     View,
     Dimensions,
     TouchableOpacity,
-    Pressable,
-    TextInput,
+
 } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { Callout } from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
 import * as Location from "expo-location";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import {
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-} from "firebase/auth";
-import { auth } from "../firebase";
+
 
 
 // Contains all of our location data for businesses that

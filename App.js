@@ -10,10 +10,6 @@ import {
     Pressable,
     TextInput,
 } from "react-native";
-import MapView, { Marker } from "react-native-maps";
-import MapViewDirections from "react-native-maps-directions";
-import * as Location from "expo-location";
-import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import {
     createUserWithEmailAndPassword,
